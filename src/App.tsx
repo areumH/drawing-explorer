@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { projectData } from './data/project';
+import { getDiscipline, projectData } from './data/project';
 import Breadcrumb from './components/Breadcrumb';
 import Chip from './components/Chip';
 import RegionSelector from './components/RegionSelector';
@@ -20,6 +20,20 @@ export default function App() {
   });
 
   const drawing = selection.drawingId ? projectData.drawings[selection.drawingId] : null;
+  const disciplineData = getDiscipline(projectData, selection.drawingId, selection.discipline);
+
+  // revision 객체 배열
+  const revisions = (() => {
+    if (!disciplineData) return [];
+
+    // region이 선택된 경우
+    if (selection.region && disciplineData.regions?.[selection.region]) {
+      return disciplineData.regions[selection.region].revisions ?? [];
+    }
+
+    // region 선택되지 않은 경우 → 전체 revision
+    return disciplineData.revisions ?? [];
+  })();
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -71,7 +85,7 @@ export default function App() {
           )}
 
           {/* Region 선택 */}
-          <RegionSelector project={projectData} selection={selection} setSelection={setSelection} />
+          <RegionSelector discipline={disciplineData} selection={selection} setSelection={setSelection} />
         </div>
 
         {/* 이미지 표시 */}
