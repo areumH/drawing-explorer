@@ -3,6 +3,7 @@ import { getDiscipline, projectData } from './data/project';
 import Breadcrumb from './components/Breadcrumb';
 import Chip from './components/Chip';
 import RegionSelector from './components/RegionSelector';
+import RevisionTimeline from './components/RevisionTimeline';
 
 export type Selection = {
   drawingId?: string | null;
@@ -34,6 +35,9 @@ export default function App() {
     // region 선택되지 않은 경우 → 전체 revision
     return disciplineData.revisions ?? [];
   })();
+
+  // revision을 날짜 역순으로 정렬
+  const sortedRevisions = [...revisions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -86,6 +90,18 @@ export default function App() {
 
           {/* Region 선택 */}
           <RegionSelector discipline={disciplineData} selection={selection} setSelection={setSelection} />
+
+          {/* Revision 선택 */}
+          <RevisionTimeline
+            revisions={sortedRevisions}
+            selectedRevision={selection.revisionVersion}
+            onSelect={(version) =>
+              setSelection((prev) => ({
+                ...prev,
+                revisionVersion: version,
+              }))
+            }
+          />
         </div>
 
         {/* 이미지 표시 */}
