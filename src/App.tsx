@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { projectData } from './data/project';
 import Breadcrumb from './components/Breadcrumb';
 import Chip from './components/Chip';
+import RegionSelector from './components/RegionSelector';
 
 export type Selection = {
   drawingId?: string | null;
@@ -23,7 +24,6 @@ export default function App() {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="flex flex-col w-full min-h-screen bg-amber-50 px-4 py-5 sm:px-8 sm:py-6">
-
         {/* 서치 영역 */}
         <div className="flex flex-col gap-3">
           <div className="flex flex-col">
@@ -69,6 +69,9 @@ export default function App() {
               ))}
             </div>
           )}
+
+          {/* Region 선택 */}
+          <RegionSelector project={projectData} selection={selection} setSelection={setSelection} />
         </div>
 
         {/* 이미지 표시 */}
