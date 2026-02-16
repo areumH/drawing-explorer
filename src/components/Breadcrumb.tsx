@@ -1,10 +1,10 @@
 import type { Project } from '../types/project';
 import type { Selection } from '../App';
 
-type BreadcrumbProps = {
+interface BreadcrumbProps {
   selection: Selection;
   project: Project;
-};
+}
 
 const Breadcrumb = ({ selection, project }: BreadcrumbProps) => {
   const drawing = selection.drawingId ? project.drawings[selection.drawingId] : null;

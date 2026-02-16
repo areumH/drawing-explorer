@@ -35,7 +35,7 @@ const RegionSelector = ({ discipline, selection, setSelection }: RegionSelectorP
             setSelection((prev) => ({
               ...prev,
               region,
-              revision: null, // region 바뀌면 revision 초기화
+              revisionVersion: null, // region 바뀌면 revision 초기화
             }))
           }
         />

@@ -27,13 +27,16 @@ export default function App() {
   const revisions = (() => {
     if (!disciplineData) return [];
 
-    // region이 선택된 경우
-    if (selection.region && disciplineData.regions?.[selection.region]) {
-      return disciplineData.regions[selection.region].revisions ?? [];
+    // region이 선택되지 않은 경우
+    if (!selection.region) return [];
+
+    // 전체를 선택한 경우
+    if (selection.region === '전체') {
+      return disciplineData.revisions ?? [];
     }
 
-    // region 선택되지 않은 경우 → 전체 revision
-    return disciplineData.revisions ?? [];
+    // 특정 region을 선택한 경우
+    return disciplineData.regions?.[selection.region]?.revisions ?? [];
   })();
 
   // revision을 날짜 역순으로 정렬

@@ -1,4 +1,4 @@
-type ChipProps = {
+interface ChipProps {
   label: string;
   selected?: boolean;
   onClick?: () => void;
