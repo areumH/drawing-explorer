@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { getDiscipline, projectData } from './data/project';
+import { projectData } from './data/project';
 import Breadcrumb from './components/Breadcrumb';
 import Chip from './components/Chip';
 import RegionSelector from './components/RegionSelector';
 import RevisionTimeline from './components/RevisionTimeline';
+import { getDiscipline } from './utils/projectSelectors';
+import DrawingViewer from './components/DrawingViewer';
 
 export type Selection = {
   drawingId?: string | null;
@@ -13,6 +15,7 @@ export type Selection = {
 };
 
 export default function App() {
+  // TODO: 전역 상태로 관리
   const [selection, setSelection] = useState<Selection>({
     drawingId: null,
     discipline: null,
@@ -109,9 +112,8 @@ export default function App() {
 
         {/* 이미지 표시 */}
         <div className="flex flex-col p-3 sm:p-8">
-          <div className="w-full aspect-square bg-pink-50">
-            {/* 현재 1:1 비율 이미지 영역때문에 스크롤 생김 */}
-            <p>이미지 영역</p>
+          <div className="w-full aspect-square border border-gray-300 bg-white">
+            <DrawingViewer project={projectData} selection={selection} />
           </div>
           <div className="flex w-full justify-center p-2 sm:p-4">
             <p>투명도 바 영역</p>

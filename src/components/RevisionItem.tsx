@@ -21,7 +21,7 @@ const RevisionItem = ({ revision, isSelected, onSelect }: RevisionItemProps) => 
           <div className="text-xs text-gray-500">{revision.date}</div>
         </div>
 
-        {revision.changes && revision.changes.length > 0 && (
+        {revision.changes.length > 0 && (
           <button
             onClick={(e) => {
               e.stopPropagation();
