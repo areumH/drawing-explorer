@@ -9,7 +9,7 @@ interface DrawingSelectorProps {
 
 export const DrawingSelector = ({ project, selection, setSelection }: DrawingSelectorProps) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 text-sm sm:text-base">
       <div className="px-2 font-bold">도면</div>
       <select
         value={selection.drawingId ?? ''}

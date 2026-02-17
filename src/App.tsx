@@ -53,14 +53,14 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col max-w-6xl mx-auto">
       {/* 상단 - breadcrumb 영역 */}
-      <div className="px-6 py-4 border-b">
+      <div className="px-3 sm:px-6 py-4 border-b">
         <Breadcrumb selection={selection} project={projectData} />
       </div>
 
       {/* 중앙 - 탐색 + 도면 이미지 */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-col-reverse sm:flex-row sm:flex-1 overflow-hidden">
         {/* 도면부터 리비전까지 탐색 */}
-        <div className="flex flex-col w-2/5 px-3 py-4 gap-3">
+        <div className="flex flex-col sm:w-2/5 px-3 py-4 gap-3">
           {/* Drawing 선택 */}
           <DrawingSelector project={projectData} selection={selection} setSelection={setSelection} />
 
@@ -84,7 +84,7 @@ export default function App() {
         </div>
 
         {/* 도면 이미지 */}
-        <div className="w-full bg-white">
+        <div className="w-full aspect-square bg-white">
           <DrawingViewer project={projectData} selection={selection} />
         </div>
       </div>

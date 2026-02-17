@@ -19,6 +19,7 @@ npm run dev
 - [x] polygon svg 오버레이 구현
 - [x] polygon 표시 토글 기능 구현
 - [x] 이미지 원본 크기 기준 svg viewBox 처리
+- [x] 반응형 레이아웃 구현
   
 ## 미완성 기능
 - [ ] imageTransform (scale / rotation) 실제 시각적 반영

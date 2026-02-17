@@ -40,8 +40,8 @@ export const DrawingViewer = ({ project, selection }: DrawingViewerProps) => {
     <div className="relative w-full h-full overflow-hidden">
       {/* 토글 버튼 */}
       {hasPolygon && (
-        <div className="absolute top-3 right-9 z-10 flex items-center gap-2">
-          <span className="text-gray-700">폴리곤 표시</span>
+        <div className="absolute top-3 right-4 sm:right-9 z-10 flex items-center gap-2">
+          <span className="text-sm sm:text-base text-gray-700">폴리곤 표시</span>
           <button
             onClick={() => setPolygonVisible((prev) => !prev)}
             className={`relative inline-flex h-6 w-10 items-center rounded-full transition-colors duration-300 cursor-pointer ${

@@ -10,7 +10,7 @@ export const Breadcrumb = ({ selection, project }: BreadcrumbProps) => {
   const drawing = selection.drawingId ? project.drawings[selection.drawingId] : null;
 
   return (
-    <div className="flex gap-2 sm:text-lg">
+    <div className="flex gap-2 text-sm sm:text-lg">
       <span>전체</span>
       {drawing && <span>&gt; {drawing.name}</span>}
       {selection.discipline && <span>&gt; {selection.discipline}</span>}

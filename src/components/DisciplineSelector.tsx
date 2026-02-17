@@ -9,7 +9,7 @@ interface DisciplineSelectorProps {
 
 export const DisciplineSelector = ({ drawing, selection, setSelection }: DisciplineSelectorProps) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 text-sm sm:text-base">
       {drawing && drawing.disciplines && (
         <>
           <div className="px-2 font-bold">공종</div>

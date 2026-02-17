@@ -11,7 +11,7 @@ export const RevisionTimeline = ({ revisions, selectedRevision, onSelect }: Revi
   if (!revisions || revisions.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 text-sm sm:text-base">
       <div className="px-2 font-bold">리비전</div>
       <div className="flex flex-col gap-3">
         {revisions.map((rev) => (
