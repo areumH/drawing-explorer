@@ -7,7 +7,7 @@ interface RevisionItemProps {
   onSelect: (version: string) => void;
 }
 
-const RevisionItem = ({ revision, isSelected, onSelect }: RevisionItemProps) => {
+export const RevisionItem = ({ revision, isSelected, onSelect }: RevisionItemProps) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -47,5 +47,3 @@ const RevisionItem = ({ revision, isSelected, onSelect }: RevisionItemProps) => 
     </div>
   );
 };
-
-export default RevisionItem;

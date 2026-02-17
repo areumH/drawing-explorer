@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { projectData } from './data/project';
-import Breadcrumb from './components/Breadcrumb';
-import Chip from './components/Chip';
-import RegionSelector from './components/RegionSelector';
-import RevisionTimeline from './components/RevisionTimeline';
 import { getDiscipline } from './utils/project';
-import DrawingViewer from './components/DrawingViewer';
+import {
+  Breadcrumb,
+  DisciplineSelector,
+  DrawingSelector,
+  DrawingViewer,
+  RegionSelector,
+  RevisionTimeline,
+} from './components';
 
 export type Selection = {
   drawingId?: string | null;
@@ -46,58 +49,26 @@ export default function App() {
   const sortedRevisions = [...revisions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <div className="flex flex-col w-full min-h-screen bg-amber-50 px-4 py-5 sm:px-8 sm:py-6">
-        {/* 서치 영역 */}
-        <div className="flex flex-col gap-3">
-          <div className="flex flex-col">
-            <Breadcrumb selection={selection} project={projectData} />
-          </div>
+    <div className="min-h-screen flex flex-col max-w-6xl py-3 mx-auto bg-gray-50">
+      {/* 상단 - breadcrumb 영역 */}
+      <div className="px-6 py-4 border-b">
+        <Breadcrumb selection={selection} project={projectData} />
+      </div>
 
+      {/* 중앙 - 탐색 + 도면 이미지 */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* 도면부터 리비전까지 탐색 */}
+        <div className="flex flex-col w-2/5 px-3 py-4 gap-3">
           {/* Drawing 선택 */}
-          <div className="flex gap-2 flex-wrap">
-            {Object.values(projectData.drawings).map((d) => (
-              <Chip
-                key={d.id}
-                label={d.name}
-                selected={selection.drawingId === d.id}
-                onClick={() =>
-                  setSelection({
-                    drawingId: d.id,
-                    discipline: null,
-                    region: null,
-                    revisionVersion: null,
-                  })
-                }
-              />
-            ))}
-          </div>
+          <DrawingSelector project={projectData} selection={selection} setSelection={setSelection} />
 
           {/* Discipline 선택 */}
-          {drawing && drawing.disciplines && (
-            <div className="flex gap-2 flex-wrap">
-              {Object.keys(drawing.disciplines).map((discipline) => (
-                <Chip
-                  key={discipline}
-                  label={discipline}
-                  selected={selection.discipline === discipline}
-                  onClick={() =>
-                    setSelection((prev) => ({
-                      ...prev,
-                      discipline,
-                      region: null,
-                      revisionVersion: null,
-                    }))
-                  }
-                />
-              ))}
-            </div>
-          )}
+          <DisciplineSelector drawing={drawing} selection={selection} setSelection={setSelection} />
 
           {/* Region 선택 */}
           <RegionSelector discipline={disciplineData} selection={selection} setSelection={setSelection} />
 
-          {/* Revision 선택 */}
+          {/* Revision 리스트 */}
           <RevisionTimeline
             revisions={sortedRevisions}
             selectedRevision={selection.revisionVersion}
@@ -110,14 +81,9 @@ export default function App() {
           />
         </div>
 
-        {/* 이미지 표시 */}
-        <div className="flex flex-col p-3 sm:p-8">
-          <div className="w-full aspect-square border border-gray-300 bg-white">
-            <DrawingViewer project={projectData} selection={selection} />
-          </div>
-          <div className="flex w-full justify-center p-2 sm:p-4">
-            <p>투명도 바 영역</p>
-          </div>
+        {/* 도면 이미지 */}
+        <div className="w-full bg-white">
+          <DrawingViewer project={projectData} selection={selection} />
         </div>
       </div>
     </div>

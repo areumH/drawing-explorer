@@ -6,7 +6,7 @@ interface BreadcrumbProps {
   project: Project;
 }
 
-const Breadcrumb = ({ selection, project }: BreadcrumbProps) => {
+export const Breadcrumb = ({ selection, project }: BreadcrumbProps) => {
   const drawing = selection.drawingId ? project.drawings[selection.drawingId] : null;
 
   return (
@@ -19,5 +19,3 @@ const Breadcrumb = ({ selection, project }: BreadcrumbProps) => {
     </div>
   );
 };
-
-export default Breadcrumb;

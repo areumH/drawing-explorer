@@ -7,7 +7,7 @@ interface DrawingViewerProps {
   selection: Selection;
 }
 
-const DrawingViewer = ({ project, selection }: DrawingViewerProps) => {
+export const DrawingViewer = ({ project, selection }: DrawingViewerProps) => {
   const imageName = getCurrentImage(project, selection);
 
   if (!imageName) {
@@ -16,5 +16,3 @@ const DrawingViewer = ({ project, selection }: DrawingViewerProps) => {
 
   return <img src={`/drawings/${imageName}`} alt="도면 이미지" className="w-full h-full object-contain" />;
 };
-
-export default DrawingViewer;
