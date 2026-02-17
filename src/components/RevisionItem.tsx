@@ -13,10 +13,11 @@ export const RevisionItem = ({ revision, isSelected, onSelect }: RevisionItemPro
   return (
     <div className="border border-gray-400 bg-white rounded-lg overflow-hidden">
       <div
+        onClick={() => onSelect(revision.version)}
         className={`flex items-center justify-between p-3 cursor-pointer transition
           ${isSelected ? 'bg-blue-100 border-blue-500' : 'hover:bg-gray-100'}`}
       >
-        <div className="flex items-center gap-5 flex-1" onClick={() => onSelect(revision.version)}>
+        <div className="flex items-center gap-5 flex-1">
           <div className="text-base font-medium">{revision.version}</div>
           <div className="text-xs text-gray-500">{revision.date}</div>
         </div>

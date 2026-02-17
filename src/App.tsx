@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { projectData } from './data/project';
 import { getDiscipline } from './utils/project';
 import {
@@ -46,10 +46,12 @@ export default function App() {
   })();
 
   // revision을 날짜 역순으로 정렬
-  const sortedRevisions = [...revisions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const sortedRevisions = useMemo(() => {
+    return [...revisions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }, [revisions]);
 
   return (
-    <div className="min-h-screen flex flex-col max-w-6xl py-3 mx-auto bg-gray-50">
+    <div className="min-h-screen flex flex-col max-w-6xl mx-auto">
       {/* 상단 - breadcrumb 영역 */}
       <div className="px-6 py-4 border-b">
         <Breadcrumb selection={selection} project={projectData} />
