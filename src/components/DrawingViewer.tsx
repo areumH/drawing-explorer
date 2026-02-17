@@ -1,6 +1,6 @@
 import type { Project } from '../types';
 import type { Selection } from '../App';
-import { getCurrentImage } from '../utils/projectSelectors';
+import { getCurrentImage } from '../utils/project';
 
 interface DrawingViewerProps {
   project: Project;

@@ -4,7 +4,7 @@ import Breadcrumb from './components/Breadcrumb';
 import Chip from './components/Chip';
 import RegionSelector from './components/RegionSelector';
 import RevisionTimeline from './components/RevisionTimeline';
-import { getDiscipline } from './utils/projectSelectors';
+import { getDiscipline } from './utils/project';
 import DrawingViewer from './components/DrawingViewer';
 
 export type Selection = {
