@@ -77,7 +77,7 @@ export default function App() {
             onSelect={(version) =>
               setSelection((prev) => ({
                 ...prev,
-                revisionVersion: version,
+                revisionVersion: prev.revisionVersion === version ? null : version,
               }))
             }
           />
