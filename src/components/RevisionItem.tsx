@@ -9,40 +9,41 @@ interface RevisionItemProps {
 
 export const RevisionItem = ({ revision, isSelected, onSelect }: RevisionItemProps) => {
   const [expanded, setExpanded] = useState(false);
+  const { version, date, description, changes } = revision;
 
   return (
     <div className="border border-gray-400 bg-white rounded-lg overflow-hidden">
       <div
-        onClick={() => onSelect(revision.version)}
+        onClick={() => onSelect(version)}
         className={`flex items-center justify-between p-3 cursor-pointer transition
           ${isSelected ? 'bg-blue-100 border-blue-500' : 'hover:bg-gray-100'}`}
       >
         <div className="flex items-center gap-5 flex-1">
-          <div className="text-sm sm:text-base font-medium">{revision.version}</div>
-          <div className="text-xs text-gray-500">{revision.date}</div>
+          <div className="text-sm sm:text-base font-medium">{version}</div>
+          <div className="text-xs text-gray-500">{date}</div>
         </div>
-
-        {revision.changes.length > 0 && (
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setExpanded((prev) => !prev);
-            }}
-            className="px-2 cursor-pointer"
-          >
-            {expanded ? '▲' : '▼'}
-          </button>
-        )}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setExpanded((prev) => !prev);
+          }}
+          className="px-2 cursor-pointer"
+        >
+          {expanded ? '▲' : '▼'}
+        </button>
       </div>
 
-      {/* 변경사항 영역 */}
-      {expanded && revision.changes && revision.changes.length > 0 && (
-        <div className="px-10 py-3 text-gray-700">
-          <ul className="list-disc">
-            {revision.changes.map((change, idx) => (
-              <li key={idx}>{change}</li>
-            ))}
-          </ul>
+      {/* 설명 + 변경사항 영역 */}
+      {expanded && (
+        <div className="px-4 py-2">
+          <p>{description}</p>
+          {changes && changes.length > 0 && (
+            <ul className="list-disc px-5 py-1 text-gray-700">
+              {changes.map((change, idx) => (
+                <li key={idx}>{change}</li>
+              ))}
+            </ul>
+          )}
         </div>
       )}
     </div>
