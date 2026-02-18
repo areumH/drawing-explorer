@@ -22,5 +22,5 @@ npm run dev
 - [x] 반응형 레이아웃 구현
   
 ## 미완성 기능
-- [ ] imageTransform (scale / rotation) 실제 시각적 반영
+- [ ] imageTransform (scale / rotation) 반영
 - [ ] polygonTransform 반영

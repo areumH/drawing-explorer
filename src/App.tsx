@@ -7,7 +7,7 @@ import {
   DrawingSelector,
   DrawingViewer,
   RegionSelector,
-  RevisionTimeline,
+  RevisionSelector,
 } from './components';
 
 export type Selection = {
@@ -18,7 +18,6 @@ export type Selection = {
 };
 
 export default function App() {
-  // TODO: 전역 상태로 관리
   const [selection, setSelection] = useState<Selection>({
     drawingId: null,
     discipline: null,
@@ -52,7 +51,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col max-w-6xl mx-auto">
-      {/* 상단 - breadcrumb 영역 */}
+      {/* 상단 - breadcrumb */}
       <div className="px-3 sm:px-6 py-4 border-b">
         <Breadcrumb selection={selection} project={projectData} />
       </div>
@@ -70,21 +69,12 @@ export default function App() {
           {/* Region 선택 */}
           <RegionSelector discipline={disciplineData} selection={selection} setSelection={setSelection} />
 
-          {/* Revision 리스트 */}
-          <RevisionTimeline
-            revisions={sortedRevisions}
-            selectedRevision={selection.revisionVersion}
-            onSelect={(version) =>
-              setSelection((prev) => ({
-                ...prev,
-                revisionVersion: prev.revisionVersion === version ? null : version,
-              }))
-            }
-          />
+          {/* Revision 선택 */}
+          <RevisionSelector revisions={sortedRevisions} selection={selection} setSelection={setSelection} />
         </div>
 
         {/* 도면 이미지 */}
-        <div className="w-full aspect-square bg-white">
+        <div className="w-full aspect-square sm:aspect-auto bg-white">
           <DrawingViewer project={projectData} selection={selection} />
         </div>
       </div>
