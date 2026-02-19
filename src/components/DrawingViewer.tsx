@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Project } from '../types';
 import type { Selection } from '../App';
 import { getCurrentImage } from '../utils/project';
+import { ToggleSwitch } from './ToggleSwitch';
 
 interface DrawingViewerProps {
   project: Project;
@@ -42,18 +43,7 @@ export const DrawingViewer = ({ project, selection }: DrawingViewerProps) => {
       {hasPolygon && (
         <div className="absolute top-3 right-4 sm:right-9 z-10 flex items-center gap-2">
           <span className="text-sm sm:text-base text-gray-700">폴리곤 표시</span>
-          <button
-            onClick={() => setPolygonVisible((prev) => !prev)}
-            className={`relative inline-flex h-6 w-10 items-center rounded-full transition-colors duration-300 cursor-pointer ${
-              polygonVisible ? 'bg-blue-500' : 'bg-gray-300'
-            }`}
-          >
-            <span
-              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-300 ${
-                polygonVisible ? 'translate-x-1' : 'translate-x-5'
-              }`}
-            />
-          </button>
+          <ToggleSwitch checked={polygonVisible} onChange={setPolygonVisible} />
         </div>
       )}
 
@@ -65,7 +55,7 @@ export const DrawingViewer = ({ project, selection }: DrawingViewerProps) => {
         onLoad={(e) => {
           const img = e.currentTarget;
           setImageSize({ width: img.naturalWidth, height: img.naturalHeight });
-        }} 
+        }}
       />
 
       {/* SVG 오버레이 */}
